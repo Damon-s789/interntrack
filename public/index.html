@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="InternTrack is a calm command center for your internship search." />
+    <title>InternTrack — Application command center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main id="auth-view" class="auth-shell">
+      <section class="auth-intro">
+        <a class="brand" href="#"><span class="brand-mark">↗</span> InternTrack</a>
+        <div class="intro-copy">
+          <p class="eyebrow">YOUR SEARCH, ORGANIZED</p>
+          <h1>Turn applications<br />into <em>momentum.</em></h1>
+          <p>A calm command center for tracking every internship opportunity, deadline, and next step.</p>
+          <div class="intro-stat"><span>01</span><p>Less searching for context.<br />More deliberate follow-ups.</p></div>
+        </div>
+        <p class="auth-footer">Built for ambitious early-career talent.</p>
+      </section>
+      <section class="auth-panel">
+        <div id="login-card" class="auth-card">
+          <p class="eyebrow">WELCOME BACK</p>
+          <h2>Pick up where you left off.</h2>
+          <form id="login-form" class="stack-form">
+            <label>Email<input required type="email" name="email" autocomplete="email" placeholder="you@example.com" /></label>
+            <label>Password<input required type="password" name="password" autocomplete="current-password" placeholder="Your password" /></label>
+            <button class="button primary" type="submit">Sign in <span>→</span></button>
+          </form>
+          <p class="form-switch">New here? <button type="button" data-auth-toggle="register">Create an account</button></p>
+        </div>
+        <div id="register-card" class="auth-card hidden">
+          <p class="eyebrow">LET'S GET STARTED</p>
+          <h2>Build your opportunity pipeline.</h2>
+          <form id="register-form" class="stack-form">
+            <label>Your name<input required type="text" name="name" maxlength="80" autocomplete="name" placeholder="Aarav Sharma" /></label>
+            <label>Email<input required type="email" name="email" autocomplete="email" placeholder="you@example.com" /></label>
+            <label>Password <small>At least 8 characters</small><input required minlength="8" type="password" name="password" autocomplete="new-password" placeholder="Create a password" /></label>
+            <button class="button primary" type="submit">Create account <span>→</span></button>
+          </form>
+          <p class="form-switch">Already have an account? <button type="button" data-auth-toggle="login">Sign in</button></p>
+        </div>
+      </section>
+    </main>
+
+    <main id="app-view" class="app-shell hidden">
+      <aside class="sidebar">
+        <a class="brand" href="#"><span class="brand-mark">↗</span> InternTrack</a>
+        <nav>
+          <button class="nav-item active" data-page="dashboard"><span>⌘</span> Overview</button>
+          <button class="nav-item" data-page="applications"><span>▦</span> Applications</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="profile"><div id="avatar" class="avatar">A</div><div><strong id="user-name">Account</strong><small id="user-email">user@email.com</small></div></div>
+          <button id="logout-btn" class="logout">Sign out <span>→</span></button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <header class="topbar"><button id="mobile-menu" class="mobile-menu" aria-label="Open navigation">☰</button><div id="page-heading"><p class="eyebrow">OVERVIEW</p><h1>Good morning, <span id="greeting-name">there</span>.</h1></div><button id="new-application" class="button primary add-button">+ Add application</button></header>
+
+        <section id="dashboard-page" class="page active-page">
+          <div class="dashboard-grid">
+            <div class="metric-card metric-total"><div><p>ACTIVE PIPELINE</p><strong id="total-count">0</strong><small>opportunities tracked</small></div><span class="metric-icon">↗</span></div>
+            <div class="metric-card"><p>INTERVIEWS</p><strong id="interview-count">0</strong><small>in progress</small></div>
+            <div class="metric-card"><p>OFFERS</p><strong id="offer-count">0</strong><small>great work!</small></div>
+            <div class="metric-card"><p>RESPONSE RATE</p><strong id="response-rate">0%</strong><small>interviews + offers</small></div>
+          </div>
+          <div class="section-grid">
+            <section class="panel pipeline-panel"><div class="panel-heading"><div><p class="eyebrow">YOUR PIPELINE</p><h2>Where things stand</h2></div><button class="text-button" data-go-applications>See all <span>→</span></button></div><div id="pipeline" class="pipeline"></div></section>
+            <section class="panel deadlines-panel"><div class="panel-heading"><div><p class="eyebrow">UP NEXT</p><h2>Deadlines</h2></div></div><div id="deadlines" class="deadline-list"></div></section>
+          </div>
+          <section class="panel recent-panel"><div class="panel-heading"><div><p class="eyebrow">RECENTLY UPDATED</p><h2>Keep the momentum going</h2></div></div><div id="recent-applications" class="recent-list"></div></section>
+        </section>
+
+        <section id="applications-page" class="page">
+          <div class="page-title-row"><div><p class="eyebrow">APPLICATIONS</p><h1>Your opportunity pipeline</h1></div><button class="button primary" data-new-application>+ Add application</button></div>
+          <div class="filter-bar"><div class="search-wrap"><span>⌕</span><input id="search-input" type="search" placeholder="Search company, role, or location" /></div><select id="status-filter"><option value="">All statuses</option><option>Wishlist</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></div>
+          <div id="applications-list" class="applications-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="application-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card form-modal"><button class="close-modal" data-close-modal aria-label="Close">×</button><p id="modal-eyebrow" class="eyebrow">NEW APPLICATION</p><h2 id="modal-title">Add an opportunity</h2>
+        <form id="application-form" class="application-form">
+          <input type="hidden" name="id" />
+          <div class="form-grid"><label>Company *<input required name="company" maxlength="120" placeholder="e.g. Figma" /></label><label>Role *<input required name="role" maxlength="160" placeholder="e.g. Product Design Intern" /></label><label>Location<input name="location" maxlength="120" placeholder="e.g. Bengaluru, India" /></label><label>Work style<select name="workMode"><option>Remote</option><option>Hybrid</option><option>On-site</option></select></label><label>Status<select name="status"><option>Wishlist</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></label><label>Applied on<input name="appliedDate" type="date" /></label><label>Deadline<input name="deadline" type="date" /></label><label>Compensation<input name="salary" maxlength="80" placeholder="e.g. ₹25,000/month" /></label></div>
+          <label>Job link<input name="jobUrl" type="url" placeholder="https://company.com/jobs/..." /></label><label>Notes<textarea name="notes" rows="4" maxlength="4000" placeholder="Why this role, people to contact, preparation notes..." ></textarea></label>
+          <div class="modal-actions"><button id="delete-application" class="button danger hidden" type="button">Delete</button><div class="action-right"><button class="button secondary" type="button" data-close-modal>Cancel</button><button class="button primary" type="submit">Save application <span>→</span></button></div></div>
+        </form>
+      </div>
+    </div>
+
+    <div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-card detail-modal"><button class="close-modal" data-close-detail aria-label="Close">×</button><div id="detail-content"></div></div></div>
+    <div id="toast" class="toast hidden"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
